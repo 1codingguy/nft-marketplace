@@ -14,3 +14,12 @@ https://ethereum.stackexchange.com/questions/94575/cannot-install-truffle-node-j
 
 `truffle-config.js` have some common configs, but need to decide which ones to use by un-commenting lines ourself
 
+## one-liner to add and commit that I always forget
+`git add . && git commit -am "comment"`
+
+## IDE always underline the 1st line pragma solidity version 
+- just as I thought, it's because of the Solidity version in settings
+
+## prettier doesn't work with solidity (A problem I solved but forgot)
+- `npm install --save-dev prettier-plugin-solidity`
+- set "prettier" as formatter in settings
