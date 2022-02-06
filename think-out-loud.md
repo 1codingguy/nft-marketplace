@@ -84,8 +84,8 @@ contract name inside the above file: `KryptoBird` without the `z`
 ## string memory
 - typically string is temporary stored in memory, because strings are variables that have memory location, and then they get wiped out
 
+## `truffle migrate --reset`
 - move to the new address (instead of changing previously deployed contracts on the chain), run a reset after compile
-`truffle migrate --reset`
 
 I still don't understand the truffle console environment.
 - When I typed `test = await KryptoBird.deployed()` it compiles the contract again, when finished `test` is not defined.
@@ -100,7 +100,7 @@ Event: one directional event of logs that keep track of blockchain data
 
 2nd argument in `require()`: an error message
 
-`indexed`
+## `indexed` - what does it do?
 - searching through
 - save gas
 - can use up to 3 index per event
@@ -118,3 +118,14 @@ kyrptoBird.getName()
 
 kyrptoBird.mint('1st')
 kyrptoBird.mint('2nd')
+kyrptoBird.mint("http...1")
+kyrptoBird.mint("http...2")
+
+kyrptoBird.balanceOf("0x29c8dB5729431c43D7Dde7ABC60aC5294f39E9F6").then(function(balance) {balanceInstance = balance})
+
+kyrptoBird.ownerOf(0)
+
+# write balanceOf() ourself that adhere to the ERC721 standard
+
+## seems "zero" address is something special?
+- there is this `address(0)` thing to check if the address is zero in tutorial

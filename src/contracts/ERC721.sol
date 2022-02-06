@@ -45,4 +45,15 @@ contract ERC721 {
     // emit the event
     emit Transfer(address(0), to, tokenId);
   }
+
+  function balanceOf(address _owner) public view returns (uint256){
+    require(_owner != address(0), "ERC721: can't query the balance of zero address");
+    return _ownedTokenCount[_owner];
+  }
+
+  function ownerOf(uint256 _tokenId) external view returns (address){
+    address owner = _tokenOwner[_tokenId];
+    require(owner != address(0), "ERC721: zero address for this tokenId");
+    return owner;
+  }
 }
