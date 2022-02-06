@@ -83,3 +83,20 @@ contract name inside the above file: `KryptoBird` without the `z`
 
 ## string memory
 - typically string is temporary stored in memory, because strings are variables that have memory location, and then they get wiped out
+
+- move to the new address (instead of changing previously deployed contracts on the chain), run a reset after compile
+`truffle migrate --reset`
+
+I still don't understand the truffle console environment.
+- When I typed `test = await KryptoBird.deployed()` it compiles the contract again, when finished `test` is not defined.
+- But when I typed `KryptoBird = await KryptoBird.deployed()` and access the getName method by `KryptoBird.getName()` then it works.
+- apparently KryptoBird refers to the .json file of the same name in the abis folder (at first)
+
+ERC721 specification does not include standard function for burning and minting 
+- `KryptoBird` is only going to be executing what we want the KryptoBird marketplace going to do
+- can write anywhere we want technically, but should be written in ERC contracts as it's part of the standardized things like creation, minting 
+
+Event: one directional event of logs that keep track of blockchain data
+
+2nd argument in `require()`: an error message
+
