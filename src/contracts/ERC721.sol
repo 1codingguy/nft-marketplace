@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-contract ERC721 {
-  /*
-  
+/*
   What does a mint function do?
   - keep track of the address
   - keep track of the tokenIds
@@ -15,6 +13,13 @@ contract ERC721 {
     - tokenId
   
    */
+
+contract ERC721 {
+  event Transfer(
+    address indexed from,
+    address indexed to,
+    uint256 indexed tokenId
+  );
 
   // which tokenId belongs to which owner
   mapping(uint256 => address) private _tokenOwner;
@@ -37,5 +42,7 @@ contract ERC721 {
     _tokenOwner[tokenId] = to;
     // increase the count of that owner
     _ownedTokenCount[to]++;
+    // emit the event
+    emit Transfer(address(0), to, tokenId);
   }
 }

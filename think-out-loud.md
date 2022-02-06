@@ -100,3 +100,21 @@ Event: one directional event of logs that keep track of blockchain data
 
 2nd argument in `require()`: an error message
 
+`indexed`
+- searching through
+- save gas
+- can use up to 3 index per event
+- But what does it do exactly?
+
+`mint()`
+- when mint() is called:
+- "from" is the address in Ganache, that is the `msg.sender`
+- "to" is the address of the contract, that means the minted token is stored in the contract itself
+
+console command always typed in:
+kyrptoBird = await KryptoBird.deployed()
+kyrptoBird.getName()
+  - check if able to access getter function
+
+kyrptoBird.mint('1st')
+kyrptoBird.mint('2nd')
