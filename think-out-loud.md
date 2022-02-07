@@ -1,3 +1,6 @@
+# URL of finished repo
+https://github.com/01Clarian/nft-marketplace-solution/
+
 ## the line to remove git files after cloning project that I always forget
 
 `$ rm -rf .git` or `$ rm -rf <repo_folder>/.git` if in other directory
@@ -129,3 +132,7 @@ kyrptoBird.ownerOf(0)
 
 ## seems "zero" address is something special?
 - there is this `address(0)` thing to check if the address is zero in tutorial
+
+
+## `virtual` modifier in function definition
+- so that other contracts inherit from it can use `override` keyword to override this function
