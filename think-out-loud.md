@@ -125,10 +125,14 @@ kryptoBird.mint("http...1")
 kryptoBird.mint("http...2")
 
 kryptoBird.balanceOf("0x29c8dB5729431c43D7Dde7ABC60aC5294f39E9F6").then(function(balance) {balanceInstance = balance})
+kryptoBird.balanceOf("0xdFA74188Ddedc05BFDeB4035d56AD1dA5071961c").then(function(balance) {balanceInstance = balance})
 
 kryptoBird.totalSupply().then(function(balance) {balanceInstance = balance})
 
 kryptoBird.ownerOf(0)
+
+kryptoBird.transferFrom('0x29c8dB5729431c43D7Dde7ABC60aC5294f39E9F6', '0xdFA74188Ddedc05BFDeB4035d56AD1dA5071961c', 0)
+
 
 # write balanceOf() ourself that adhere to the ERC721 standard
 

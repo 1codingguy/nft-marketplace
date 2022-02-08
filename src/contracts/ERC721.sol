@@ -25,6 +25,8 @@ contract ERC721 {
   mapping(uint256 => address) private _tokenOwner;
   // how many tokens each owner has
   mapping(address => uint256) private _ownedTokenCount;
+  // tokenId to approved address
+  mapping(uint256 => address) private _tokenApprovals;
 
   function _exist(uint256 tokenId) internal view returns (bool) {
     // setting the address of NFT owner, check the mapping
@@ -46,14 +48,45 @@ contract ERC721 {
     emit Transfer(address(0), to, tokenId);
   }
 
-  function balanceOf(address _owner) public view returns (uint256){
-    require(_owner != address(0), "ERC721: can't query the balance of zero address");
+  function balanceOf(address _owner) public view returns (uint256) {
+    require(
+      _owner != address(0),
+      "ERC721: can't query the balance of zero address"
+    );
     return _ownedTokenCount[_owner];
   }
 
-  function ownerOf(uint256 _tokenId) external view returns (address){
+  function ownerOf(uint256 _tokenId) public view returns (address) {
     address owner = _tokenOwner[_tokenId];
-    require(owner != address(0), "ERC721: zero address for this tokenId");
+    require(owner != address(0), 'ERC721: zero address for this tokenId');
     return owner;
+  }
+
+  function _transferFrom(
+    address _from,
+    address _to,
+    uint256 _tokenId
+  ) internal {
+    require(_to != address(0), 'Error: Cannot transfer to the zero address');
+    require(
+      ownerOf(_tokenId) == _from,
+      'Error: Cannot transfer a token not owned by you!'
+    );
+    // decerement the token from the person transfer out
+    _ownedTokenCount[_from]--;
+    // increment the token for the person tranfer to
+    _ownedTokenCount[_to]++;
+    // assign token to new owner
+    _tokenOwner[_tokenId] = _to;
+
+    emit Transfer(_from, _to, _tokenId);
+  }
+
+  function transferFrom(
+    address _from,
+    address _to,
+    uint256 _tokenId
+  ) public payable {
+    _transferFrom(_from, _to, _tokenId);
   }
 }
