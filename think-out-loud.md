@@ -115,18 +115,20 @@ Event: one directional event of logs that keep track of blockchain data
 - "to" is the address of the contract, that means the minted token is stored in the contract itself
 
 console command always typed in:
-kyrptoBird = await KryptoBird.deployed()
-kyrptoBird.getName()
+kryptoBird = await KryptoBird.deployed()
+kryptoBird.getName()
   - check if able to access getter function
 
-kyrptoBird.mint('1st')
-kyrptoBird.mint('2nd')
-kyrptoBird.mint("http...1")
-kyrptoBird.mint("http...2")
+kryptoBird.mint('1st')
+kryptoBird.mint('2nd')
+kryptoBird.mint("http...1")
+kryptoBird.mint("http...2")
 
-kyrptoBird.balanceOf("0x29c8dB5729431c43D7Dde7ABC60aC5294f39E9F6").then(function(balance) {balanceInstance = balance})
+kryptoBird.balanceOf("0x29c8dB5729431c43D7Dde7ABC60aC5294f39E9F6").then(function(balance) {balanceInstance = balance})
 
-kyrptoBird.ownerOf(0)
+kryptoBird.totalSupply().then(function(balance) {balanceInstance = balance})
+
+kryptoBird.ownerOf(0)
 
 # write balanceOf() ourself that adhere to the ERC721 standard
 
@@ -136,3 +138,11 @@ kyrptoBird.ownerOf(0)
 
 ## `virtual` modifier in function definition
 - so that other contracts inherit from it can use `override` keyword to override this function
+
+## duplicated inheritance is not allowed in newer version of compiler
+e.g.
+- `ERC721Connector` inherits from `ERC721Enumerable`, `ERC721Enumerable` inherits from `ERC721`
+- `ERC721Connector` shouldn't inherit from `ERC721` because the child `ERC721Enumerable` already inherits from `ERC721`
+
+
+## why always need to keep track of index of something in Solidity?
