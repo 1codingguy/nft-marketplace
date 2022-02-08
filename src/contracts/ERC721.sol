@@ -20,6 +20,11 @@ contract ERC721 {
     address indexed to,
     uint256 indexed tokenId
   );
+  event Approval(
+    address indexed ownerAddress,
+    address indexed targetAddress,
+    uint256 indexed tokenId
+  );
 
   // which tokenId belongs to which owner
   mapping(uint256 => address) private _tokenOwner;
@@ -87,6 +92,29 @@ contract ERC721 {
     address _to,
     uint256 _tokenId
   ) public payable {
+    require(isApprovedOrOwner(msg.sender, _tokenId));
     _transferFrom(_from, _to, _tokenId);
+  }
+
+  function approve(address _to, uint256 tokenId) public {
+    address owner = ownerOf(tokenId);
+    // require the person approving is the actual owner of the token
+    require(
+      owner == msg.sender,
+      'Error: current caller does not own the token'
+    );
+    // require we can't send token from the owner to the owner himself (current caller)
+    require(owner != _to, 'Error: caller cannot send the token to himself');
+    // update the map of the approval addresses
+    _tokenApprovals[tokenId] = _to;
+    // approving an address to a tokenId
+    emit Approval(msg.sender, _to, tokenId);
+  }
+
+  function isApprovedOrOwner(address spender, uint256 tokenId) internal view returns(bool){
+    require(_exist(tokenId));
+    address owner = ownerOf(tokenId);
+    return (spender == owner);
+    // return (spender == owner || getApproved(tokenId) == spender );
   }
 }

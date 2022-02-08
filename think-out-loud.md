@@ -114,7 +114,7 @@ Event: one directional event of logs that keep track of blockchain data
 - "from" is the address in Ganache, that is the `msg.sender`
 - "to" is the address of the contract, that means the minted token is stored in the contract itself
 
-console command always typed in:
+## console command always typed in:
 kryptoBird = await KryptoBird.deployed()
 kryptoBird.getName()
   - check if able to access getter function
@@ -150,3 +150,24 @@ e.g.
 
 
 ## why always need to keep track of index of something in Solidity?
+
+
+## so approving a transfer needs four steps:
+- require the person approving is the actual owner of the token
+- require we can't send token from the owner to the owner himself (current caller)
+- update the map of the approval addresses
+- approving an address to a tokenId - broadcast the transfer if all the requirements are fulfilled
+  - `emit Approval()` 
+
+# ERC-165
+- Every ERC-721 compliant contract must implement interface of both ERC-721 and ERC-165.
+- ERC-165 standard is just a way of checking if your contract's data match the data of any given contract. 
+
+## interface
+An interface is like an abstract contract, but you can only define unimplemented functions.
+- in ERC721 interface, all the unimplemented functions are added up to some bytes 
+
+Overload vs override
+- Overload - same name same definition in both parent and child
+- Override - function in child component overrides parent's definition 
+
