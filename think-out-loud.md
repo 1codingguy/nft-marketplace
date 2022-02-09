@@ -179,3 +179,24 @@ If a contract inherits from an interface:
 - the contract has to implement all the functions defined in the interface, otherwise the compiler will throw an error
 - functions in the child should have `override` keyword to replace the definition in the parent interface
 
+In the constructor of ERC721.sol:
+```
+  constructor() {
+    _registerInterface(
+      bytes4(
+        keccak256('balanceOf(bytes4)') ^
+          keccak256('ownerOf(bytes4)') ^
+          keccak256('transferFrom(bytes4)')
+      )
+    );
+  }
+```
+From what I understand now, because it is calculating the size of those three functions inherit from the interface:
+- `balanceOf()`
+- `ownerOf()`
+- `transferFrom()`
+Does it mean that "registering interface" actually mean to calculate the total byte size of the interface functions that are inherit from the interface?
+
+
+
+

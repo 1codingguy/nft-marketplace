@@ -20,13 +20,23 @@ contract ERC721Enumerable is ERC721, IERC721Enumerable {
   // more explainitory name: whichTokenRefersToWhatIndexInOwnedTokens
   mapping(uint256 => uint256) private _ownedTokensIndex;
 
+  constructor() {
+    _registerInterface(
+      bytes4(
+        keccak256('totalSupply(bytes4)') ^
+          keccak256('tokenByIndex(bytes4)') ^
+          keccak256('tokenOfOwnerByIndex(bytes4)')
+      )
+    );
+  }
+
   // returns the total supply from the _allTokens array
-  function totalSupply() external override view returns (uint256) {
+  function totalSupply() external view override returns (uint256) {
     return _allTokens.length;
   }
 
   // better name: getTokenByIndex()
-  function tokenByIndex(uint256 index) public override view returns (uint256) {
+  function tokenByIndex(uint256 index) public view override returns (uint256) {
     // guard clause to make sure index is not out of bound
     // if calling totalSupply in the require statement it causes an error, says it's not yet visible?
     // but calling it with this.totalSupply() works
@@ -37,8 +47,8 @@ contract ERC721Enumerable is ERC721, IERC721Enumerable {
   //
   function tokenOfOwnerByIndex(address ownerAddress, uint256 index)
     public
-    override
     view
+    override
     returns (uint256)
   {
     // I reckon this require line will break because balanceOf() doesn't return a number but an object

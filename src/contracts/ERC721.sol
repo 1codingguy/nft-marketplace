@@ -25,6 +25,16 @@ contract ERC721 is ERC165, IERC721 {
   // tokenId to approved address
   mapping(uint256 => address) private _tokenApprovals;
 
+  constructor() {
+    _registerInterface(
+      bytes4(
+        keccak256('balanceOf(bytes4)') ^
+          keccak256('ownerOf(bytes4)') ^
+          keccak256('transferFrom(bytes4)')
+      )
+    );
+  }
+
   function _exist(uint256 tokenId) internal view returns (bool) {
     // setting the address of NFT owner, check the mapping
     address owner = _tokenOwner[tokenId];
