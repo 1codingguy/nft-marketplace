@@ -171,3 +171,11 @@ Overload vs override
 - Overload - same name same definition in both parent and child
 - Override - function in child component overrides parent's definition 
 
+# ERC165 and bytes
+- Not sure what is `bytes4` and `supportedInterfaces` about.
+- what is "registering fingerprint data"?
+
+If a contract inherits from an interface:
+- the contract has to implement all the functions defined in the interface, otherwise the compiler will throw an error
+- functions in the child should have `override` keyword to replace the definition in the parent interface
+
