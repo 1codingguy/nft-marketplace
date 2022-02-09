@@ -198,5 +198,17 @@ From what I understand now, because it is calculating the size of those three fu
 Does it mean that "registering interface" actually mean to calculate the total byte size of the interface functions that are inherit from the interface?
 
 
+# Truffle test suite
+mocha.js
+chai.js
+
+## What is artifacts?
+"Artifacts are simply the JSON files of the contracts. the meaning of artifact in software is anything that is created so a piece of software can be developed."
+https://ethereum.stackexchange.com/questions/30457/what-are-artifacts-in-truffle/97201
+
+
+# Test
+- Each describe() is a test container
+- each describe is a scope block
 
 
