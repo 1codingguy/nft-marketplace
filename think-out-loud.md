@@ -226,6 +226,9 @@ Most important lines in `async loadWeb3()`:
 const provider = await detectEthereumProvider()
 
 window.web3 = new Web3(provider)
+
+// what is this line about?
+await window.ethereum.enable()
 ```
 
 `async loadBlockchainData()`:

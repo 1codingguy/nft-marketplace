@@ -2,8 +2,27 @@ import React, { Component } from 'react'
 import Web3 from 'web3'
 import detectEthereumProvider from '@metamask/detect-provider'
 import KryptoBird from '../abis/KryptoBird.json'
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardImage,
+  MDBBtn,
+} from 'mdb-react-ui-kit'
+import './App.css'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      account: '',
+      contract: null,
+      totalSupply: 0,
+      kryptoBirdz: [],
+    }
+  }
+
   async componentDidMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
@@ -26,6 +45,7 @@ class App extends Component {
   async loadBlockchainData() {
     const web3 = window.web3
     const accounts = await web3.eth.requestAccounts()
+    // only the first account form Ganache
     this.setState({ account: accounts[0] })
 
     const networkId = await web3.eth.net.getId()
@@ -37,15 +57,14 @@ class App extends Component {
       const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
       this.setState({ contract })
-      console.log(this.state)
 
-      // call the totalSupply
+      // call the totalSupply, set it as state variable
       const totalSupply = await contract.methods.totalSupply().call()
       this.setState({ totalSupply })
 
-      // setup an array to keep track of token
-      for (let i = 1; i <= totalSupply; i++) {
-        const KryptoBird = await contract.methods.kryptoBirdz(i - 1).call()
+      // this.state.kryptoBirdz array to keep track of tokens
+      for (let i = 0; i < totalSupply; i++) {
+        const KryptoBird = await contract.methods.kryptoBirdz(i).call()
         // how should we handle the state on the front end?
         this.setState({
           kryptoBirdz: [...this.state.kryptoBirdz, KryptoBird],
@@ -70,19 +89,9 @@ class App extends Component {
       })
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '',
-      contract: null,
-      totalSupply: 0,
-      kryptoBirdz: [],
-    }
-  }
-
   render() {
     return (
-      <div>
+      <div className='container-filled'>
         {console.log(this.state.kryptoBirdz)}
         <nav className='navbar navbar-dark fixed-top bg-dark flex-md-wrap p-0 shadow'>
           <div
@@ -131,6 +140,36 @@ class App extends Component {
                 </form>
               </div>
             </main>
+          </div>
+          <hr />
+
+          <div className='row textCenter '>
+            {this.state.kryptoBirdz.map((kryptoBird, i) => {
+              return (
+                <div>
+                  <div>
+                    <MDBCard
+                      className='token img'
+                      style={{ maxWidth: '22rem' }}
+                    >
+                      <MDBCardImage
+                        src={kryptoBird}
+                        position='top'
+                        height='250rem'
+                        style={{ marginRight: '4px' }}
+                      />
+                      <MDBCardBody>
+                        <MDBCardTitle>KryptoBirdz</MDBCardTitle>
+                        <MDBCardText>
+                          KryptoBirdz description text here.
+                        </MDBCardText>
+                        <MDBBtn href={kryptoBird}>Download</MDBBtn>
+                      </MDBCardBody>
+                    </MDBCard>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
