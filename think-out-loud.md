@@ -212,3 +212,34 @@ https://ethereum.stackexchange.com/questions/30457/what-are-artifacts-in-truffle
 - each describe is a scope block
 
 
+# Bootstrap
+- Import Bootstrap in index.js, the whole app has access to Bootstrap
+- constructor() in class based React is to handle state
+- shortcut cheat sheet: https://hackerthemes.com/bootstrap-cheatsheet/
+
+# Front end interface using React
+- Before doing anything, we want to make sure the user load the metamask wallet and connect properly
+- Without the wallet, marketplace won't work
+
+Most important lines in `async loadWeb3()`:
+```
+const provider = await detectEthereumProvider()
+
+window.web3 = new Web3(provider)
+```
+
+`async loadBlockchainData()`:
+- get the metamask account information
+- get the network ID to grab the contract, then we can access things like totalSupply, how many NFTs were minted
+- get the contract abi and address (recall when interact with contract on chain, we need its abi and address (that the contract is deployed to))
+- ? why need to create a new instance of a contract with that abi and address?
+
+
+
+
+
+## opening a file from another directory in vscode 
+`code -r <fileName>`
+
+The error encounted when press on mint button is solved by resetting Metamask
+https://ethereum.stackexchange.com/questions/89879/error-ethjs-query-while-formatting-outputs-from-rpc-messageinvalid-sende
