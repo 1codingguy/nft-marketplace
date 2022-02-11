@@ -98,7 +98,7 @@ class App extends Component {
             className='navbar-brand col-sm-3 col-md-2 mr-0'
             style={{ color: 'white' }}
           >
-            KryptoBird NFTs Marketplace
+            CryptoBird NFTs Marketplace
           </div>
           <ul className='navbar-nav px-3'>
             <li className='nav-item text-nowrap d-none d-sm-none d-sm-block'>
@@ -115,7 +115,7 @@ class App extends Component {
                 style={{ opacity: '0.8' }}
               >
                 <h1 style={{ color: 'white' }}>
-                  KryptoBirdz - NFT marketplace
+                  CryptoBird - NFT marketplace
                 </h1>
                 <form
                   onSubmit={event => {

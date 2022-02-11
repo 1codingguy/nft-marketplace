@@ -68,7 +68,6 @@ contract name inside the above file: `KryptoBird` without the `z`
 - because the names of everything was `KryptoBirdz` with a `z`, but in the require() call the argument is `KryptoBird` with No `z`, and there's only `KryptoBirdz.json` not `KryptoBird.json`, so it says can't read the file.
 
 # truffle console
-
 `npx truffle console`
 
 # use `await` keyword to deploy the abis on chain?
@@ -237,12 +236,15 @@ await window.ethereum.enable()
 - get the contract abi and address (recall when interact with contract on chain, we need its abi and address (that the contract is deployed to))
 - ? why need to create a new instance of a contract with that abi and address?
 
-
-
-
-
 ## opening a file from another directory in vscode 
 `code -r <fileName>`
 
 The error encounted when press on mint button is solved by resetting Metamask
 https://ethereum.stackexchange.com/questions/89879/error-ethjs-query-while-formatting-outputs-from-rpc-messageinvalid-sende
+
+## image url are saved under src/crypto-birdz/pic-links.txt
+use imgbb.com to upload those image files, get links
+
+
+# Smart contract safety issues:
+- math overflow/ underflow -> use safeMath
